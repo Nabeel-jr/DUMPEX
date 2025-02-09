@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Notification to Employee</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Heading */
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Form and label styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+            margin-top: 10px;
+            align-self: flex-start;
+        }
+
+        /* Select and textarea styling */
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            color: #333;
+            resize: vertical;
+        }
+
+        /* Textarea specific styling */
+        textarea {
+            height: 100px;
+        }
+
+        /* Submit button styling */
+        .submit-button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Back link styling */
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Send Notification to Employee</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="employee_id">Select Employee:</label>
+            <select name="employee_id" id="employee_id" required>
+                {% for employee in employees %}
+                    <option value="{{ employee.id }}">{{ employee.username }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="message">Message:</label>
+            <textarea name="message" id="message" placeholder="Type your message here..." required></textarea>
+
+            <button type="submit" class="submit-button">Send</button>
+        </form>
+        <a href="{% url 'manager:manager_notifications' %}" class="back-link">Back to Notifications</a>
+    </div>
+</body>
+</html>

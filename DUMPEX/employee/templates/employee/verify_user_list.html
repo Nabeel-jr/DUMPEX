@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "css/employee.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Unverified Customers</h1>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search by username or email" />
+    </div>
+
+    {% if unverified_users %}
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in unverified_users %}
+            <tr>
+                <td class="username">{{ user.username }}</td>
+                <td class="email">{{ user.email }}</td>
+                <td>
+                    <a href="{% url 'employee:verify_user' user.id %}" class="verify-link">Verify</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="no-data">No unverified customers found.</p>
+    {% endif %}
+
+    <div class="back-link-container">
+        <a href="{% url 'employee:employee_dashboard' %}" class="back-link">Back to Dashboard</a>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#searchInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#userTable tbody tr").filter(function() {
+                $(this).toggle($(this).find(".username").text().toLowerCase().indexOf(value) > -1 ||
+                               $(this).find(".email").text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>
+{% endblock %}

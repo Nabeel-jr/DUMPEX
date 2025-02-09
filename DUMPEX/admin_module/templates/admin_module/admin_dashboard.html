@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/customer.css" %}">      
+<style>
+    /* Styles for the dashboard container */
+    .dashboard-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    /* Top section styling */
+    .top-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .logo {
+        width: 150px; /* Adjust the logo size */
+        margin-bottom: 15px;
+    }
+
+    .hello-text {
+        font-size: 28px;
+        font-weight: bold;
+        color: #2c3e50; /* Darker color for contrast */
+        margin: 0;
+    }
+
+    .username-display {
+        font-size: 20px;
+        color: #555; /* Lighter color for username */
+        margin-top: 5px;
+    }
+
+    /* Info section styling */
+    .info-section {
+        margin-top: 30px;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-title {
+        font-size: 24px;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    .info-text {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    /* Wallet balance display */
+    .balance-display {
+        font-size: 18px;
+        color: #333;
+        margin-top: 10px;
+    }
+
+    /* Button styling */
+    .action-button {
+        margin-top: 20px;
+        padding: 12px 20px;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .action-button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+    }
+
+    /* Additional styling for responsiveness */
+    @media (max-width: 600px) {
+        .logo {
+            width: 120px; /* Smaller logo for mobile */
+        }
+
+        .hello-text {
+            font-size: 24px;
+        }
+
+        .username-display {
+            font-size: 18px;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="dashboard-container">
+    <!-- Top Section with Logo, Hello Text, Username, and Balance -->
+    <div class="top-section">
+        {% comment %} <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo"> {% endcomment %}
+        <h2 class="hello-text">HELLO, ADMIN</h2>
+        <p class="username-display">{{ user.username }}</p> <!-- Display the admin's username -->
+        <p class="balance-display">Wallet Balance: {{ wallet.balance|default:"0.00" }} INR</p> <!-- Display wallet balance -->
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+        <h3 class="info-title">Your Dashboard Overview</h3>
+        <p class="info-text">Welcome to your Admin dashboard. Here you can monitor your activities and access various tools to help you Administrate effectively.</p>
+        <p class="info-text">Last Login: <strong>{{ user.last_login }}</strong></p>
+    </div>
+
+    
+</div>
+
+{% endblock %}

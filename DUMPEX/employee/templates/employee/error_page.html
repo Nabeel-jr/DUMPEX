@@ -1,0 +1,57 @@
+<!-- employee/templates/employee/error_page.html -->
+{% extends "layout.html" %}
+{% load static %}
+
+{% block css %}
+<style>
+    /* Main container styling */
+    .error-container {
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    /* Page heading styling */
+    .error-container h2 {
+        font-size: 28px;
+        color: #e74c3c;
+        margin-bottom: 15px;
+    }
+
+    /* Description styling */
+    .error-container p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    /* Back to Dashboard button styling */
+    .error-container a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .error-container a:hover {
+        background-color: #218838;
+        color:#fff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <h2>Error</h2>
+    <p>{{ error_message }}</p>
+    <a href="{% url 'employee:employee_dashboard' %}">Back to Dashboard</a>
+</div>
+{% endblock %}
