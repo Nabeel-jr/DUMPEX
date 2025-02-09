@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "css/employee.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Address Details for {{ user.username }}</h1>
+
+    <div class="address-details">
+        <p><strong>Street:</strong> {{ address.street }}</p>
+        <p><strong>City:</strong> {{ address.city }}</p>
+        <p><strong>Postal Code:</strong> {{ address.postal_code }}</p>
+    </div>
+
+    <div class="back-link">
+        <a href="{% url 'employee:notification_manager' %}" class="view-address-btn">Back to Notification Manager</a>
+    </div>
+</div>
+{% endblock %}

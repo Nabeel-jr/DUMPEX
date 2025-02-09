@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/employee.css' %}">       
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h2>Manager Notifications</h2>
+    <div>
+        {% for notification in notifications %}
+            <div class="notification">
+                <strong>Message:</strong> {{ notification.message }}<br>
+                <strong>Received At:</strong> {{ notification.created_at|date:"Y-m-d H:i:s" }}<br>
+                {% if notification.date %}
+                    <strong>Collection Date:</strong> {{ notification.date|date:"Y-m-d" }}<br>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No notifications from the manager.</p>
+        {% endfor %}
+    </div>
+</div>
+<!-- <br><br><br><br> -->
+{% endblock %}

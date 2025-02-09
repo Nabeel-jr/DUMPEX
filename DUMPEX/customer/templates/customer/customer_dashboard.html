@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/customer.css" %}">      
+{% endblock %}
+{% block content %}
+<div class="dashboard-container">
+  
+  <!-- Top Section with Logo, Hello Text, and Username -->
+  <div class="top-section">
+      <h2 class="hello-text">Hello,</h2>    
+      <p class="username-display">{{ user.username }}</p>
+  </div>
+
+  <!-- Wallet Section -->
+  <div class="wallet-section">
+      <a href="{% url 'wallet:withdraw_money' %}" class="wallet-balance">
+        Wallet Balance: <span>{{ wallet.balance|default:"0.00" }} INR</span>
+      </a>
+  </div>
+
+  <div class="recent-activities">
+    <h3>Recent Activities</h3>
+    <ul class="activity-list">
+        {% for noti in notification %}
+            <li class="notification-item">
+                {{ noti.message }} <!-- Adjust according to your Notification model -->
+                <span class="notification-date">{{ noti.created_at|date:"Y-m-d H:i" }}</span> <!-- Format date as needed -->
+            </li>
+        {% empty %}
+            <li>No notifications available.</li>
+        {% endfor %}
+        
+    </ul>
+</div>
+
+<!-- Notifications Section -->
+<div class="notifications-section">
+    <h3>Your Notifications</h3>
+    <div class="notification-item">
+        
+
+        <p>You have {{ noti  }} new notifications.</p>
+        
+    </div>
+</div>
+
+<!-- Action Buttons Section
+<div class="action-buttons">
+    <button class="btn">View All Activities</button>
+    <button class="btn">Manage Bookings</button>
+    <button class="btn">Settings</button>
+</div> -->
+  
+  
+</div>
+{% endblock %}

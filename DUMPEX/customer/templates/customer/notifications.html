@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/customer.css" %}">      
+{% endblock %}
+
+{% block content %}
+
+<h2 style="text-align: center; font-family: Arial, sans-serif; color: #333; margin-bottom: 20px;">Notifications</h2>
+<div class="notifications-container">
+    {% if notifications %}
+        <ul class="notification-list">
+            {% for notification in notifications %}
+                <li class="notification-item">
+                    <div class="notification-content">
+                        <p class="notification-date">{{ notification.created_at|date:"d M Y, H:i" }}</p>
+                        <p class="notification-message">{{ notification.message }}</p>
+                    </div>
+                    <form method="POST" action="{% url 'core:delete_notification' notification.id %}" class="delete-form">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-notifications">No notifications available.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
